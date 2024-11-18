@@ -1,3 +1,7 @@
+import React from "react";
+import ReactDOM from "React-dom/client"
+
+
 
 const parent=React.createElement(
     "div",
