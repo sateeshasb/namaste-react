@@ -2,22 +2,27 @@ import React from "react";
 import ReactDOM from "React-dom/client"
 
 
+// jsx => Babel is traspiles it React.CreateElement  => ReactElement-javascript(object) => HTMLElement(Render)
 
-const parent=React.createElement(
-    "div",
-    {id: "hading"},
-    React.createElement("div", 
-    {id: "child"},
-    [React.createElement("h1",{}, " i am h1 tag"),
-    React.createElement("h2",{}, " i am h2 tag"),]
-    ),
-   React.createElement("div", {id: "child"},
-    [React.createElement("h1",{}, " i am h1 tag"),
-    React.createElement("h2",{}, " i am h2 tag"),]
-    )
-)
-console.log(parent)
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const elem = <span>amaste</span>;
 
-root.render(parent);
+const Test = () => (
+  <h1>
+    {elem}
+    Good Morning
+  </h1>
+);
+
+const number = 1000;
+const Heading = () => (
+  <div id="container">  
+    <h2>{number}</h2>
+    <h1>hello react from Sateesha!</h1>
+  </div>
+);
+
+ const root = ReactDOM.createRoot(document.getElementById("root"));
+
+
+ root.render(<Heading />)
