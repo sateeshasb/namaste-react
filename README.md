@@ -18,3 +18,25 @@
 -HTTPs
 -Tree Shaking - remove th unused code 
 -Different dev and prod Bundles 
+// JSX => Babel transpiles it to React.CreateElement => ReactElement (JavaScript object) => HTMLElement (Render)
+
+/* (Namaste Food)
+* Header
+* - Logo
+* - Nav Items
+* Body
+* - Restaurant Container
+*  - Restaurant Card
+*    - Image
+*    - Rating, name, etc.
+* - Search
+* Footer
+* - Copyright
+* - Address
+* - Contact
+*/
+
+# React Hooks
+(Normal js utiliti function)
+useState() - superpowerfull state variable in react
+useEffect()
