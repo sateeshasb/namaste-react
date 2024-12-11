@@ -1,18 +1,36 @@
  import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
-import resList from "../utils/mockData";
 import shimmer from "./shimmer";
 
 const Body = () => {
 
-  const [ListofRestaurants, setListOfRestaurnt] = useState( resList );
+  const [ListofRestaurants, setListOfRestaurnt] = useState([]);
+  const [filteredRestaurant,setfilteredRestaurnt] = useState([]);
+
 
   const [searchText, setsearchText] = useState("");
 
-  
+  useEffect(() => {
+    fetchData();
+},[]);
+
+const fetchData = async () => { 
+  const data = await fetch(
+    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=16.216018&lng=77.3565608&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+  );
+
+  const json = await data.json();
+
+  console.log(json);
+  setListOfRestaurnt(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+  setfilteredRestaurnt(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+};
+
 
  
-    return (
+    return ListofRestaurants.length == 0 ?(
+      <shimmer/>
+    ): (
       <div className="body">
         <div className="filter">
           <div className="search">
@@ -25,8 +43,8 @@ const Body = () => {
             <button onClick={()=>{
               //filter the res cards update UI
              const filteredRestaurant = ListofRestaurants.filter(
-              (res)= res.data.name.toLowerCase().include(searchText.toLowerCase()) );
-              setListOfRestaurnt(filteredRestaurant);
+              (res)= res.info.name.toLowerCase().include(searchText.toLowerCase()) );
+              setfilteredRestaurnt(filteredRestaurant);
             }}>search</button>
           </div>
           <button className="filter-btn" 
@@ -43,7 +61,7 @@ const Body = () => {
 
           <div className="res-container">
           {/* Render a RestaurantCard for each restaurant in resobj */}
-          {ListofRestaurants.map((restaurant) => (
+          {filteredRestaurant.map((restaurant) => (
             <RestaurantCard key={restaurant.info.id} resData={restaurant} />
           ))}
         </div>
